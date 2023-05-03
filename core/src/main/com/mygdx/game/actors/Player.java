@@ -9,25 +9,24 @@ import com.mygdx.game.Ingredient;
 import com.mygdx.game.interact.Interactable;
 import com.mygdx.game.levels.Level;
 import com.mygdx.game.actors.controllers.Controller;
+import org.jetbrains.annotations.VisibleForTesting;
 
-/**
- * 
- * @author Thomas McCarthy
- * 
- * The Player class stores all information regarding a chef, and also handles player movement.
- *
+/** 
+  The Player class stores all information regarding a chef, and also handles player movement.
  */
+
 public class Player {
 
 
-	private float posX;
-	private float posY;
+	public float posX;
+	public float posY;
 
 	public PlayerType type;
 	// The LinkedList is used as an implementation of a stack
 	public Ingredient carrying;
 
 	public Controller controller;
+	public boolean isPositionValid;
 
 	private Level level;
 
@@ -87,6 +86,8 @@ public class Player {
 		}
 	}
 
+
+
 	Boolean isPositionValid(float x, float y) {
 		boolean bl = false, br = false, tl = false, tr = false;
 		for (Rectangle rect: level.type.chefValidAreas) {
@@ -104,7 +105,9 @@ public class Player {
 		saveData.addChild("type", new JsonValue(type.name));
 		saveData.addChild("x", new JsonValue(posX));
 		saveData.addChild("y", new JsonValue(posY));
-		saveData.addChild("carrying", new JsonValue(carrying._name));
+		if (carrying != null) {
+			saveData.addChild("carrying", new JsonValue(carrying._name));
+		}
 		saveData.addChild("controller", controller.saveGame());
 
 		return saveData;

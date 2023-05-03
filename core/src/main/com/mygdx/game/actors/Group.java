@@ -10,8 +10,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+
+The Group class can represent a group of customers.
+A Group is a collection of multiple Customer instances, alongside respective level instance.
+The Group can update and render its members, keep track of customers food,
+and actions.
+The Group class also has methods to save and load game data.
+*/
+
+
 public class Group {
-    List<Customer> members = new ArrayList<>();
+    public List<Customer> members = new ArrayList<>();
 
     public boolean active = true;
 
